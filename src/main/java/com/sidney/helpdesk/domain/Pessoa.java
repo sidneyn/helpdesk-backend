@@ -19,23 +19,24 @@ import javax.persistence.Id;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.sidney.helpdesk.domain.enums.Perfil;
 
-@Entity // responsavel por criar a tabela no banco de dados 
-public abstract class Pessoa implements Serializable{
-	private static final long serialVersionYID = 1L;
+@Entity // responsavel por criar a tabela no banco de dados  serializable  
+public abstract class Pessoa implements Serializable{	
+	private static final long serialVersionUID = 1L;
+
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)  //geracao do id será do banco de dados
 	protected Integer id;
 	protected String nome;
 	
-	@Column(unique = true)
+	@Column(unique = true) // nao tera cpf dubplicado
 	protected String cpf;
 	
-	@Column(unique = true)
+	@Column(unique = true) // nao email dubplicado
 	protected String email;
 	protected String senha;
 	
-	@ElementCollection(fetch = FetchType.EAGER)
+	@ElementCollection(fetch = FetchType.EAGER) // na lista de perfil 
 	@CollectionTable(name = "PERFIS")
 	protected Set<Integer> perfis = new HashSet<>();
 	

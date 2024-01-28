@@ -10,6 +10,7 @@ import com.sidney.helpdesk.domain.enums.Perfil;
 
 @Entity
 public class Cliente extends Pessoa {
+	private static final long serialVersionUID = 1L;
 	
 	// relacionamento um tecnico para muitos chamados
 	// sendo mapeado pela classe tecnico na classe chamado			
