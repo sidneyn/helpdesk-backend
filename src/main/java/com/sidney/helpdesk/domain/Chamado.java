@@ -15,6 +15,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.sidney.helpdesk.domain.enums.Prioridade;
 import com.sidney.helpdesk.domain.enums.Status;
 
+
 @Entity
 public class Chamado implements Serializable {
 	private static final long serialVersionUID = 1L;

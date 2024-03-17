@@ -19,12 +19,13 @@ import javax.persistence.Id;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.sidney.helpdesk.domain.enums.Perfil;
 
-@Entity // responsavel por criar a tabela no banco de dados  serializable  
+//responsavel por criar a tabela no banco de dados  serializable 
+@Entity  
 public abstract class Pessoa implements Serializable{	
 	private static final long serialVersionUID = 1L;
 
 	
-	@Id
+	@Id // chave primaria 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)  //geracao do id será do banco de dados
 	protected Integer id;
 	protected String nome;
@@ -36,14 +37,13 @@ public abstract class Pessoa implements Serializable{
 	protected String email;
 	protected String senha;
 	
-	@ElementCollection(fetch = FetchType.EAGER) // na lista de perfil 
+	@ElementCollection(fetch = FetchType.EAGER) // colecao de elementos tipo inter. vai carrega a lista de perfil na lista de usuario na lista de perfil 
 	@CollectionTable(name = "PERFIS")
-	protected Set<Integer> perfis = new HashSet<>();
+	protected Set<Integer> perfis = new HashSet<>(); // HashSet evita o ponteiro nulo
 	
 	@JsonFormat(pattern = "dd/MM/yyyy")
 	protected LocalDate dataCriacao = LocalDate.now();	
-	
-	
+		
 	public Pessoa() {
 		super();
 		addPerfil(Perfil.CLIENTE); 
