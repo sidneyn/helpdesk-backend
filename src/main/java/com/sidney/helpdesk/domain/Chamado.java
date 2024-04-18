@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.sidney.helpdesk.domain.enums.Prioridade;
@@ -26,9 +27,11 @@ public class Chamado implements Serializable {
 	
 	@JsonFormat(pattern = "dd/MM/yyyy")
 	private LocalDate dataAbertura = LocalDate.now();
+	
 	@JsonFormat(pattern = "dd/MM/yyyy")	
 	private LocalDate dataFechamento;
 	
+	 @NotNull(message = "Campo Prioridade não pode ser nulo")
 	private Prioridade prioridade;
 	private Status status;
 	private String titulo;
@@ -36,10 +39,12 @@ public class Chamado implements Serializable {
 	
 	@ManyToOne  // Muitos chamados para um tecnico 
 	@JoinColumn(name = "tecnico_id")
+	@NotNull(message = "Campo Tecnico não pode ser nulo")
 	private Tecnico tecnico;
 	
 	@ManyToOne // Muitos chamados para um cliente
 	@JoinColumn(name = "cliente_id")
+	@NotNull(message = "Campo Cliente não pode ser nulo")
 	private Cliente cliente;
 	
 	public Chamado() {

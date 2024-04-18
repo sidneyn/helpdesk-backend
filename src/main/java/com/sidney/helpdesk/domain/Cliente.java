@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sidney.helpdesk.domain.enums.Perfil;
 
 @Entity
@@ -13,9 +14,10 @@ public class Cliente extends Pessoa {
 	private static final long serialVersionUID = 1L;
 	
 	// relacionamento um tecnico para muitos chamados
-	// sendo mapeado pela classe tecnico na classe chamado			
+	// sendo mapeado pela classe tecnico na classe chamado	
+	@JsonIgnore
 	@OneToMany(mappedBy = "cliente") 
-	private List<Chamado> chamados = new ArrayList<>();
+	private List<Chamado> chamados = new ArrayList<>(); // arralist para nao ter o ponteiro nulo.
 
 	public Cliente() {
 		super();		

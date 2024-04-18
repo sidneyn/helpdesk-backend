@@ -20,17 +20,18 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.sidney.helpdesk.domain.enums.Perfil;
 
 //responsavel por criar a tabela no banco de dados  serializable 
-@Entity  
+
+@Entity   // informando que a classe pessoa é uma entidade é o banco deve criar a tabela
 public abstract class Pessoa implements Serializable{	
 	private static final long serialVersionUID = 1L;
 
-	
+	// o tipo protected permite que as classes de herança possa ver os atributos da classe pai herança
 	@Id // chave primaria 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)  //geracao do id será do banco de dados
 	protected Integer id;
 	protected String nome;
 	
-	@Column(unique = true) // nao tera cpf dubplicado
+	@Column(unique = true) // javax.persistem nao tera cpf dubplicado
 	protected String cpf;
 	
 	@Column(unique = true) // nao email dubplicado
@@ -39,11 +40,11 @@ public abstract class Pessoa implements Serializable{
 	
 	@ElementCollection(fetch = FetchType.EAGER) // colecao de elementos tipo inter. vai carrega a lista de perfil na lista de usuario na lista de perfil 
 	@CollectionTable(name = "PERFIS")
-	protected Set<Integer> perfis = new HashSet<>(); // HashSet evita o ponteiro nulo
+	protected Set<Integer> perfis = new HashSet<>(); // HashSet evita a exceçao de ponteiro nulo
 	
 	@JsonFormat(pattern = "dd/MM/yyyy")
 	protected LocalDate dataCriacao = LocalDate.now();	
-		
+		// toda pessoa criada no sistema que nao tenha nenhum parametro ele terar o perfil definido como cliente como padrão
 	public Pessoa() {
 		super();
 		addPerfil(Perfil.CLIENTE); 
@@ -59,6 +60,7 @@ public abstract class Pessoa implements Serializable{
 		addPerfil(Perfil.CLIENTE);
 	}
 
+	// metodos acessores e manipuladores
 	public Integer getId() {
 		return id;
 	}
