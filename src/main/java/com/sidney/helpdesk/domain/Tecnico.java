@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sidney.helpdesk.domain.enums.Perfil;
 
 @Entity
@@ -14,7 +15,8 @@ public class Tecnico extends Pessoa {
 
 	// relacionamento um tecnico para muitos chamados
 	// sendo mapeado pela classe tecnico na classe chamado
-		
+	
+	@JsonIgnore	 // protege a requisicao feita pelo get da serialização que faz um loop dos dados quando requisitado na Api-Rest Postman
 	@OneToMany(mappedBy = "tecnico") 	// um Tecnico para muitos chamados
 	private List<Chamado> chamados = new ArrayList<>();
 

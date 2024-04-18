@@ -15,7 +15,8 @@ public class Cliente extends Pessoa {
 	
 	// relacionamento um tecnico para muitos chamados
 	// sendo mapeado pela classe tecnico na classe chamado	
-	@JsonIgnore
+	
+	@JsonIgnore	 // protege a requisicao feita pelo get da serialização que faz um loop dos dados quando requisitado na Api-Rest Postman	
 	@OneToMany(mappedBy = "cliente") 
 	private List<Chamado> chamados = new ArrayList<>(); // arralist para nao ter o ponteiro nulo.
 
