@@ -3,6 +3,8 @@ package com.sidney.helpdesk.services;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
@@ -37,6 +39,14 @@ public class TecnicoService {
 		Tecnico newObj = new Tecnico (objDTO);
 		return repository.save(newObj); // chamada assincrona 
 	}
+	
+	public Tecnico update(Integer id, @Valid TecnicoDTO objDTO) {
+		objDTO.setId(id);
+		Tecnico oldObj = findById(id);
+		validaPorCpfEmail(objDTO);
+		oldObj = new Tecnico(objDTO);
+		return repository.save(oldObj);
+	}	
 /**
  * Metodo valida o cpf antes de ser inserido e nao causar uma violação de dados no banco  
  * @param objDTO
@@ -54,7 +64,8 @@ public class TecnicoService {
 		if (obj.isPresent() && obj.get().getId() != objDTO.getId()) {
 				throw new DataIntegrityViolationException("E-mail ja cadastrado no sistema!");
 			}
-	}	
+	}
+
 
 }
 
