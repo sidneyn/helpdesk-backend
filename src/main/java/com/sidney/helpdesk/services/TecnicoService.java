@@ -7,7 +7,9 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.DeleteMapping;
 
 import com.sidney.helpdesk.domain.Pessoa;
 import com.sidney.helpdesk.domain.Tecnico;
@@ -46,7 +48,17 @@ public class TecnicoService {
 		validaPorCpfEmail(objDTO);
 		oldObj = new Tecnico(objDTO);
 		return repository.save(oldObj);
-	}	
+	}		
+
+	public void delete(Integer id) {
+		Tecnico obj = findById(id);
+		if (obj.getChamados().size() > 0) {
+			throw new DataIntegrityViolationException("Tecnico possui ordens de serviços e não pode ser deletado!");
+		}
+		
+		repository.deleteById(id);				
+	}
+
 /**
  * Metodo valida o cpf antes de ser inserido e nao causar uma violação de dados no banco  
  * @param objDTO
@@ -65,7 +77,7 @@ public class TecnicoService {
 				throw new DataIntegrityViolationException("E-mail ja cadastrado no sistema!");
 			}
 	}
-
+	
 
 }
 
