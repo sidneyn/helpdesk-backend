@@ -16,10 +16,10 @@ import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.sidney.helpdesk.domain.Tecnico;
+import com.sidney.helpdesk.domain.Cliente;
 import com.sidney.helpdesk.domain.enums.Perfil;
 
-public class TecnicoDTO implements Serializable{	
+public class ClienteDTO implements Serializable{	
 	private static final long serialVersionUID = 1L;
 
 	protected Integer id;
@@ -36,13 +36,13 @@ public class TecnicoDTO implements Serializable{
 	@JsonFormat(pattern = "dd/MM/yyyy")
 	protected LocalDate dataCriacao = LocalDate.now();
 
-	public TecnicoDTO() {
+	public ClienteDTO() {
 		super();
-		addPerfil(Perfil.TECNICO);
+		addPerfil(Perfil.CLIENTE);
 		// TODO Auto-generated constructor stub
 	}
 
-	public TecnicoDTO(Tecnico obj) {
+	public ClienteDTO(Cliente obj) {
 		super();
 		this.id = obj.getId();
 		this.nome = obj.getNome();
@@ -51,7 +51,7 @@ public class TecnicoDTO implements Serializable{
 		this.senha = obj.getSenha();
 		this.perfis = obj.getPerfis().stream().map(x -> x.getCodigo()).collect(Collectors.toSet());
 		this.dataCriacao = obj.getDataCriacao();
-		addPerfil(Perfil.TECNICO);
+		addPerfil(Perfil.CLIENTE);
 	}
 
 	public Integer getId() {
@@ -110,7 +110,4 @@ public class TecnicoDTO implements Serializable{
 		this.dataCriacao = dataCriacao;
 	}	
 	
-	
-
-
 }
