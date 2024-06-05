@@ -46,6 +46,10 @@ public class Chamado implements Serializable {
 	@JoinColumn(name = "cliente_id")
 	@NotNull(message = "Campo Cliente não pode ser nulo")
 	private Cliente cliente;
+
+	private String nomeTecnico;
+
+	private String nomeCliente;
 	
 	public Chamado() {
 		super();
@@ -63,7 +67,7 @@ public class Chamado implements Serializable {
 		this.tecnico = tecnico;
 		this.cliente = cliente;
 	}
-
+	
 	public Integer getId() {
 		return id;
 	}
