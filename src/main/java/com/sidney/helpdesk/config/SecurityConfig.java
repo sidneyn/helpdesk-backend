@@ -33,6 +33,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	private JWTUtil jwtUtil;
 	@Autowired
 	private UserDetailsService userDetailsService;
+	
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
