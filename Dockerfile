@@ -1,9 +1,16 @@
+# Usar uma imagem base do OpenJDK
 FROM maven:3.8.3-openjdk-11-slim AS build
-WORKDIR /app
-COPY . .
-RUN mvn clean package -DskipTests
 
-FROM openjdk:11-jre-slim
-COPY --from=build /target/helpdesk-0.0.1-SNAPSHOT.jar /helpdesk-0.0.1-SNAPSHOT.jar
+# Definir o diretório de trabalho dentro do contêiner
+WORKDIR /app
+
+# Copiar o arquivo JAR da aplicação para o diretório de trabalho
+COPY target/*.jar app.jar
+
+# Expor a porta que a aplicação usará
 EXPOSE 8080
-CMD ["java", "-jar", "/helpdesk-0.0.1-SNAPSHOT.jar"]
+
+# Comando para executar a aplicação
+ENTRYPOINT ["java", "-jar", "app.jar"]
+
+
