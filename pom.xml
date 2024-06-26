@@ -75,22 +75,15 @@
                 <source>1.8</source>  <!-- Set to your source version -->
                 <target>1.8</target>  <!-- Set to your target version -->
             </configuration>
-        </plugin>
+        </plugin>    
         <plugin>
 	        <groupId>org.springframework.boot</groupId>
 	        <artifactId>spring-boot-maven-plugin</artifactId>
 	        <configuration>
-	            <mainClass>com.baeldung.demo.DemoApplication</mainClass>
+	            <mainClass>com.sidney.helpdesk.HelpdeskApplication</mainClass>
 	            <layout>JAR</layout>
 	        </configuration>
-	        <executions>
-		    	<execution>
-		        	<goals>
-		           		<goal>repackage</goal>
-		          	</goals>
-		        </execution>
-      		</executions>
-   		</plugin>       
+	    </plugin>               
     </plugins>
 </build>
 <!--
